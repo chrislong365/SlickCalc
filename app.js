@@ -1,7 +1,7 @@
 
 
 var total= 0;
-var current= " ";
+var current= "";
 var symbol="";
 var calculated= 0;
 var first= 0;
@@ -113,13 +113,30 @@ function division(){
 
 }
 function equals(){
-	compute();
-
+	if (current== "" && total== 0)
+	{
+	document.getElementById('calc__screen--digets').innerHTML= "INVALID INPUT";
+	}
+	else
+	{
+		compute();
+		total= 0;
+		current= "";
+		calculated= 1;
+		first= 0;
+		symbol= "";
+	}
 }
 function negate(){
-	current= "-".concat(current);
-	document.getElementById('calc__screen--digets').innerHTML= current;
-
+	if (current== "" && total== 0)
+	{
+	document.getElementById('calc__screen--digets').innerHTML= "INVALID INPUT";
+	}
+	else
+	{
+		current= "-".concat(current);
+		document.getElementById('calc__screen--digets').innerHTML= current;
+	}
 }
 function clear(){
 	total= 0;
@@ -144,16 +161,23 @@ function del(){
 }
 
 function square(){
-	if (calculated!=1)
+	if (current== "" && total== 0)
 	{
-	total= parseFloat(current)* parseFloat(current);
-	document.getElementById('calc__screen--digets').innerHTML= total;
-	calculated= 1;
+	document.getElementById('calc__screen--digets').innerHTML= "INVALID INPUT";
 	}
 	else
 	{
-		total= total* total;
-		document.getElementById('calc__screen--digets').innerHTML= total;
+		if (calculated!=1)
+		{
+			total= parseFloat(current)* parseFloat(current);
+			document.getElementById('calc__screen--digets').innerHTML= total;
+			calculated= 1;
+		}
+		else
+		{
+			total= total* total;
+			document.getElementById('calc__screen--digets').innerHTML= total;
+		}
 	}
 }
 
